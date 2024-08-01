@@ -1,6 +1,9 @@
 package hn.unah.lenguajes.jose.martinez.pulperia.repositorio;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import hn.unah.lenguajes.jose.martinez.pulperia.Modelos.TipoProductoModel;
 
@@ -15,4 +18,18 @@ public interface TipoProductoRepositorio extends JpaRepository<TipoProductoModel
      */
     public TipoProductoModel buscarPorProducto(String descripcionString);
 
+
+    public List<TipoProductoModel> getByDescripcion(String descripcion);
+
+    public boolean existsByDescripcion(String descripcion);
+
+
+    /*
+     * @Query("select f from tipo productos f where lower(f.descripcion) = lower(:descripcion)")
+    public List<TipoProductoModel> obtenerPorDescripcion(@Param("descripcion")String descripcion);
+
+     * 
+     */
+    
+    /*que es la f */
 }
