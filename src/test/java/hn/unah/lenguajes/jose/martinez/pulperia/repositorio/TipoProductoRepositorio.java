@@ -10,7 +10,8 @@ public interface TipoProductoRepositorio extends JpaRepository<TipoProductoModel
 
 
     /* Esto se utiliza cuando queremos buscar en el modelo utilizando un tipo de dato
-     * 
+     *  Si quisieramos hacerlo con otros datos realizaremos un 
+     * public nombreDelModelo nombreDeFuncion(TipoDeDato nombreDeDato)
      */
     public TipoProductoModel buscarPorProducto(String descripcionString);
 
