@@ -13,6 +13,9 @@ import hn.unah.lenguajes.jose.martinez.pulperia.Servicios.TipoProductoServicio;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 
@@ -29,6 +32,15 @@ public class TipoProductoController {
     public List<TipoProductoModel> obtenerTodos() {
         return this.tipoProductoServicio.obtenerTodos();
     }
+
+    @PostMapping("/crear")
+    public TipoProductoModel crearNuevoProducto(@RequestParam String descripcion) {
+        //TODO: process POST request
+
+        return this.tipoProductoServicio.crearNuevo(descripcion);
+
+    }
+    
     
 
 
