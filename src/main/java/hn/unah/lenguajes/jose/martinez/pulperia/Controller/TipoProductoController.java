@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 
 
@@ -67,6 +69,12 @@ public class TipoProductoController {
         return this.tipoProductoServicio.eliminarPorDescripcion(descripcion);
     }
     
+    @PutMapping("/actualizar/{codigoTipo}")
+    public TipoProductoModel actualizar(@PathVariable (name="codigoTipo") long codigo, @RequestBody TipoProductoModel tipoProducto) {
+    
+        
+        return this.tipoProductoServicio.actualizar(codigo, tipoProducto);
+    }
     
 
 
