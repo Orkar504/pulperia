@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import hn.unah.lenguajes.jose.martinez.pulperia.Modelos.TipoProductoModel;
 
@@ -14,14 +15,27 @@ public interface TipoProductoRepositorio extends JpaRepository<TipoProductoModel
 
     /* Esto se utiliza cuando queremos buscar en el modelo utilizando un tipo de dato
      *  Si quisieramos hacerlo con otros datos realizaremos un 
-     * public nombreDelModelo nombreDeFuncion(TipoDeDato nombreDeDato)
+     * public nombreDelModelo getByNombreDeVariable(TipoDeDato nombreDeDato)
      */
-    public TipoProductoModel buscarPorProducto(String descripcionString);
+    //public TipoProductoModel buscarPorProducto(String descripcionString);
 
 
-    public List<TipoProductoModel> getByDescripcion(String descripcion);
+    public List<TipoProductoModel> getByDescripcionString(String descripcionString);
 
-    public boolean existsByDescripcion(String descripcion);
+    /*El nombre de la funcion realiza un modelo basandose en el nombre de la 
+     * variable dentro del modelo
+     */
+    public boolean existsByDescripcionString(String descripcionString);
+
+    public long deleteByDescripcionString(String descripcionString);
+
+
+    /*Esto sirve para obtener un registro utilizando un dato diferente */
+    @Query("select f from TipoProductoModel f where f.descripcionString =  :descripcion")
+
+    public List<TipoProductoModel> ObtenerPorDescripcion(@Param("descripcion")String descripcionString);
+
+
 
 
     /*
@@ -31,5 +45,5 @@ public interface TipoProductoRepositorio extends JpaRepository<TipoProductoModel
      * 
      */
     
-    /*que es la f */
+
 }

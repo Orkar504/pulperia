@@ -1,6 +1,7 @@
 package hn.unah.lenguajes.jose.martinez.pulperia.Modelos;
 
-import jakarta.annotation.Generated;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,9 +18,10 @@ public class TipoProductoModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="codigotipoproducto")
 private long codigoTipoProducto;
 
-
+@Column(name="descripcion")
 private String descripcionString;
 
 private Integer reorden;

@@ -6,8 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import hn.unah.lenguajes.jose.martinez.pulperia.repositorio.TipoProductoRepositorio;
+import jakarta.transaction.Transactional;
 import hn.unah.lenguajes.jose.martinez.pulperia.Modelos.TipoProductoModel;
+
 @Service
+@Transactional 
+/*Se agrega esto para poder eliminar los datos a traves de la descripcion
+* O en general para crear un metodo personalizado de delete
+*
+*/
 public class TipoProductoServicio {
 
     @Autowired
@@ -40,7 +47,20 @@ public class TipoProductoServicio {
         return "No existe el registro";
     }
 
-    public TipoProductoModel actualizar(long codigoTipoProducto, TipoProductoModel tipoProducto){
+    public String eliminarPorDescripcion (String descripcion)
+    {
+        if(this.tipoProductoRepositorio.existsByDescripcionString(descripcion))
+        {
+            this.tipoProductoRepositorio.deleteByDescripcionString(descripcion);
+            return "Registro eliminado por medio de la descripcion con exito";
+        }
+        else
+        {
+            return "No Existe el Registro";
+        }
+    }
+
+     public TipoProductoModel actualizar(long codigoTipoProducto, TipoProductoModel tipoProducto){
         if(this.tipoProductoRepositorio.existsById(codigoTipoProducto)){            
             TipoProductoModel tipoProductoActualizar = this.tipoProductoRepositorio.findById(codigoTipoProducto).get();
             tipoProductoActualizar.setDescripcionString(tipoProducto.getDescripcionString());
@@ -51,16 +71,24 @@ public class TipoProductoServicio {
         return null;
     }
 
+    public List<TipoProductoModel >ObtenerPorDescripcion (String descripcion )
+    {
+        return this.tipoProductoRepositorio.ObtenerPorDescripcion(descripcion);
+      // return this.tipoProductoRepositorio.ObtenerPorDescripcion(descripcion);
+    }
+
+
+
+
+    
+    
     /*
      * Como buscar por un campo en especifico 
      * y eliminar por campo en especifico
      *
-    public TipoProductoModel obtenerPorDecripcion (string descripcionString)
-    {
-
-
-    }
+    
     */
+    
 
 
     /*
